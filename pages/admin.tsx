@@ -42,9 +42,9 @@ const Admin = () => {
         body: formData,
       }),
       {
-        loading: 'Uploading...',
-        success: 'Image successfully uploaded!🎉',
-        error: `Upload failed 😥 Please try again ${error}`,
+        loading: 'Guardando...',
+        success: 'Imagen guardada exitosamente!🎉',
+        error: `Error en guardado 😥 Por favor intenta más tarde${error}`,
       },
     )
   }
@@ -67,12 +67,12 @@ const Admin = () => {
   return (
     <div className="container mx-auto max-w-md py-12">
       <Toaster />
-      <h1 className="text-3xl font-medium my-5">Create a new link</h1>
+      <h1 className="text-3xl font-medium my-5">Crear un nuevo perfil</h1>
       <form className="grid grid-cols-1 gap-y-6 shadow-lg p-8 rounded-lg" onSubmit={handleSubmit(onSubmit)}>
         <label className="block">
-          <span className="text-gray-700">Title</span>
+          <span className="text-gray-700">Nombre</span>
           <input
-            placeholder="Title"
+            placeholder="Nombre"
             name="title"
             type="text"
             {...register('title', { required: true })}
@@ -80,9 +80,9 @@ const Admin = () => {
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">Description</span>
+          <span className="text-gray-700">Descripción</span>
           <input
-            placeholder="Description"
+            placeholder="Descripción"
             {...register('description', { required: true })}
             name="description"
             type="text"
@@ -90,9 +90,9 @@ const Admin = () => {
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">Url</span>
+          <span className="text-gray-700">URL a red social</span>
           <input
-            placeholder="https://example.com"
+            placeholder="https://ejemplo.com"
             {...register('url', { required: true })}
             name="url"
             type="text"
@@ -100,9 +100,9 @@ const Admin = () => {
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">Category</span>
+          <span className="text-gray-700">Categoría</span>
           <input
-            placeholder="Name"
+            placeholder="Categoría"
             {...register('category', { required: true })}
             name="category"
             type="text"
@@ -110,7 +110,7 @@ const Admin = () => {
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">Upload a .png or .jpg image (max 1MB).</span>
+          <span className="text-gray-700">Selecciona una imagen .png o .jpg (max 1MB).</span>
           <input
             {...register('image', { required: true })}
             onChange={uploadPhoto}
@@ -135,10 +135,10 @@ const Admin = () => {
               >
                 <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" />
               </svg>
-              Creating...
+              Creando...
             </span>
           ) : (
-            <span>Create Link</span>
+            <span>Creando perfil</span>
           )}
         </button>
       </form>
