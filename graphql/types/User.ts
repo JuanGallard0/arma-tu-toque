@@ -1,16 +1,16 @@
-import { enumType, intArg, objectType, stringArg } from 'nexus';
-import { extendType } from 'nexus';
-import { Link } from './Link';
+import { enumType, intArg, objectType, stringArg } from "nexus";
+import { extendType } from "nexus";
+import { Link } from "./Link";
 
 export const User = objectType({
-  name: 'User',
+  name: "User",
   definition(t) {
-    t.string('id');
-    t.string('name');
-    t.string('email');
-    t.string('image');
-    t.field('role', { type: Role });
-    t.list.field('favorites', {
+    t.string("id");
+    t.string("name");
+    t.string("email");
+    t.string("image");
+    t.field("role", { type: Role });
+    t.list.field("favorites", {
       type: Link,
       async resolve(_parent, _args, ctx) {
         return await ctx.prisma.user
@@ -26,15 +26,15 @@ export const User = objectType({
 });
 
 const Role = enumType({
-  name: 'Role',
-  members: ['USER', 'ADMIN'],
+  name: "Role",
+  members: ["USER", "ADMIN"],
 });
 
 export const UserFavorites = extendType({
-  type: 'Query',
+  type: "Query",
   definition(t) {
-    t.list.field('favorites', {
-      type: 'Link',
+    t.list.field("favorites", {
+      type: "Link",
       async resolve(_, _args, ctx) {
         const user = await ctx.prisma.user.findUnique({
           where: {
@@ -44,7 +44,7 @@ export const UserFavorites = extendType({
             favorites: true,
           },
         });
-        if (!user) throw new Error('Invalid user');
+        if (!user) throw new Error("Invalid user");
         return user.favorites;
       },
     });
@@ -52,10 +52,10 @@ export const UserFavorites = extendType({
 });
 
 export const BookmarkLink = extendType({
-  type: 'Mutation',
+  type: "Mutation",
   definition(t) {
-    t.field('bookmarkLink', {
-      type: 'Link',
+    t.field("bookmarkLink", {
+      type: "Link",
       args: {
         id: stringArg(),
       },

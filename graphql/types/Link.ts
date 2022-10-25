@@ -1,29 +1,32 @@
-import { nonNull, objectType, stringArg, extendType } from 'nexus';
-import { connectionFromArraySlice, cursorToOffset } from 'graphql-relay';
+import { nonNull, objectType, stringArg, extendType } from "nexus";
+import { connectionFromArraySlice, cursorToOffset } from "graphql-relay";
+import { User } from "./User";
+import { type } from "os";
+import { connect } from "http2";
 
 export const Link = objectType({
-  name: 'Link',
+  name: "Link",
   definition(t) {
-    t.string('id');
-    t.int('index');
-    t.int('userId');
-    t.string('title');
-    t.string('url');
-    t.string('description');
-    t.string('imageUrl');
-    t.string('category');
+    t.string("id");
+    t.int("index");
+    t.int("userId");
+    t.string("title");
+    t.string("url");
+    t.string("description");
+    t.string("imageUrl");
+    t.string("category");
   },
 });
 
 // get ALl Links
 export const LinksQuery = extendType({
-  type: 'Query',
+  type: "Query",
   definition(t) {
-    t.connectionField('links', {
+    t.connectionField("links", {
       type: Link,
       resolve: async (_, { after, first }, ctx) => {
         const offset = after ? cursorToOffset(after) + 1 : 0;
-        if (isNaN(offset)) throw new Error('cursor is invalid');
+        if (isNaN(offset)) throw new Error("cursor is invalid");
 
         const [totalCount, items] = await Promise.all([
           ctx.prisma.link.count(),
@@ -44,10 +47,10 @@ export const LinksQuery = extendType({
 });
 // get Unique Link
 export const LinkByIDQuery = extendType({
-  type: 'Query',
+  type: "Query",
   definition(t) {
-    t.nonNull.field('link', {
-      type: 'Link',
+    t.nonNull.field("link", {
+      type: "Link",
       args: { id: nonNull(stringArg()) },
       resolve(_parent, args, ctx) {
         const link = ctx.prisma.link.findUnique({
@@ -63,9 +66,9 @@ export const LinkByIDQuery = extendType({
 
 // create link
 export const CreateLinkMutation = extendType({
-  type: 'Mutation',
+  type: "Mutation",
   definition(t) {
-    t.nonNull.field('createLink', {
+    t.nonNull.field("createLink", {
       type: Link,
       args: {
         title: nonNull(stringArg()),
@@ -80,9 +83,11 @@ export const CreateLinkMutation = extendType({
             email: ctx.user.email,
           },
         });
-         if (!user || user.role !== 'ADMIN') {
+        /*
+        if (!user || user.role !== "ADMIN") {
           throw new Error(`You do not have permission to perform action`);
         }
+        */
         const newLink = {
           title: args.title,
           url: args.url,
@@ -101,10 +106,10 @@ export const CreateLinkMutation = extendType({
 
 // update Link
 export const UpdateLinkMutation = extendType({
-  type: 'Mutation',
+  type: "Mutation",
   definition(t) {
-    t.nonNull.field('updateLink', {
-      type: 'Link',
+    t.nonNull.field("updateLink", {
+      type: "Link",
       args: {
         id: stringArg(),
         title: stringArg(),
@@ -130,10 +135,10 @@ export const UpdateLinkMutation = extendType({
 });
 // // delete Link
 export const DeleteLinkMutation = extendType({
-  type: 'Mutation',
+  type: "Mutation",
   definition(t) {
-    t.nonNull.field('deleteLink', {
-      type: 'Link',
+    t.nonNull.field("deleteLink", {
+      type: "Link",
       args: {
         id: nonNull(stringArg()),
       },
