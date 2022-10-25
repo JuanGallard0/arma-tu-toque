@@ -1,11 +1,23 @@
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { gql, useMutation } from '@apollo/client'
-import toast, { Toaster } from 'react-hot-toast'
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { gql, useMutation } from "@apollo/client";
+import toast, { Toaster } from "react-hot-toast";
 
 const CreateLinkMutation = gql`
-  mutation($title: String!, $url: String!, $imageUrl: String!, $category: String!, $description: String!) {
-    createLink(title: $title, url: $url, imageUrl: $imageUrl, category: $category, description: $description) {
+  mutation (
+    $title: String!
+    $url: String!
+    $imageUrl: String!
+    $category: String!
+    $description: String!
+  ) {
+    createLink(
+      title: $title
+      url: $url
+      imageUrl: $imageUrl
+      category: $category
+      description: $description
+    ) {
       title
       url
       imageUrl
@@ -13,69 +25,73 @@ const CreateLinkMutation = gql`
       description
     }
   }
-`
+`;
 
 const Admin = () => {
-  const [createLink, { data, loading, error }] = useMutation(CreateLinkMutation)
+  const [createLink, { data, loading, error }] =
+    useMutation(CreateLinkMutation);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
   // Upload photo function
-  const uploadPhoto = async e => {
-    const file = e.target.files[0]
-    const filename = encodeURIComponent(file.name)
-    const res = await fetch(`/api/upload-image?file=${filename}`)
-    const data = await res.json()
-    const formData = new FormData()
+  const uploadPhoto = async (e) => {
+    const file = e.target.files[0];
+    const filename = encodeURIComponent(file.name);
+    const res = await fetch(`/api/upload-image?file=${filename}`);
+    const data = await res.json();
+    const formData = new FormData();
 
     // @ts-ignore
     Object.entries({ ...data.fields, file }).forEach(([key, value]) => {
-      formData.append(key, value)
-    })
+      formData.append(key, value);
+    });
 
     toast.promise(
       fetch(data.url, {
-        method: 'POST',
+        method: "POST",
         body: formData,
       }),
       {
-        loading: 'Guardando...',
-        success: 'Imagen guardada exitosamente!🎉',
+        loading: "Guardando...",
+        success: "Imagen guardada exitosamente!🎉",
         error: `Error en guardado 😥 Por favor intenta más tarde${error}`,
-      },
-    )
-  }
+      }
+    );
+  };
 
-  const onSubmit = async data => {
-    const { title, url, category, description, image } = data
-    const imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image[0].name}`
-    const variables = { title, url, category, description, imageUrl }
+  const onSubmit = async (data) => {
+    const { title, url, category, description, image } = data;
+    const imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image[0].name}`;
+    const variables = { title, url, category, description, imageUrl };
     try {
       toast.promise(createLink({ variables }), {
-        loading: 'Creating new link..',
-        success: 'Link successfully created!🎉',
+        loading: "Creating new link..",
+        success: "Link successfully created!🎉",
         error: `Something went wrong 😥 Please try again -  ${error}`,
-      })
+      });
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   return (
-    <div className="container mx-auto max-w-md py-12">
+    <div className="container mx-auto max-w-md py-12 p-5 bg-gray-100 m-36 rounded-lg">
       <Toaster />
       <h1 className="text-3xl font-medium my-5">Crear un nuevo perfil</h1>
-      <form className="grid grid-cols-1 gap-y-6 shadow-lg p-8 rounded-lg" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="grid grid-cols-1 gap-y-6 shadow-lg p-8 rounded-lg"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <label className="block">
           <span className="text-gray-700">Nombre</span>
           <input
             placeholder="Nombre"
             name="title"
             type="text"
-            {...register('title', { required: true })}
+            {...register("title", { required: true })}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
@@ -83,7 +99,7 @@ const Admin = () => {
           <span className="text-gray-700">Descripción</span>
           <input
             placeholder="Descripción"
-            {...register('description', { required: true })}
+            {...register("description", { required: true })}
             name="description"
             type="text"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -93,7 +109,7 @@ const Admin = () => {
           <span className="text-gray-700">URL a red social</span>
           <input
             placeholder="https://ejemplo.com"
-            {...register('url', { required: true })}
+            {...register("url", { required: true })}
             name="url"
             type="text"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -103,16 +119,18 @@ const Admin = () => {
           <span className="text-gray-700">Categoría</span>
           <input
             placeholder="Categoría"
-            {...register('category', { required: true })}
+            {...register("category", { required: true })}
             name="category"
             type="text"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">Selecciona una imagen .png o .jpg (max 1MB).</span>
+          <span className="text-gray-700">
+            Selecciona una imagen .png o .jpg (max 1MB).
+          </span>
           <input
-            {...register('image', { required: true })}
+            {...register("image", { required: true })}
             onChange={uploadPhoto}
             type="file"
             accept="image/png, image/jpeg"
@@ -138,12 +156,12 @@ const Admin = () => {
               Creando...
             </span>
           ) : (
-            <span>Creando perfil</span>
+            <span>Crear perfil</span>
           )}
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Admin
+export default Admin;

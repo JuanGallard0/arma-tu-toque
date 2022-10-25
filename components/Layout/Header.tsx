@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from 'next/link';
-import { useUser } from '@auth0/nextjs-auth0';
+import React from "react";
+import Link from "next/link";
+import { useUser } from "@auth0/nextjs-auth0";
 
 const Header = () => {
   const { user } = useUser();
@@ -45,11 +45,13 @@ const Header = () => {
               />
             </div>
           ) : (
-            <Link href="/api/auth/login">
-              <a className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
-                Ingresar
-              </a>
-            </Link>
+            <div className="flex items-center space-x-5">
+              <Link href="/api/auth/login">
+                <a className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
+                  Ingresar
+                </a>
+              </Link>
+            </div>
           )}
         </nav>
       </div>

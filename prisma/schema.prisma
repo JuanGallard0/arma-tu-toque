@@ -1,10 +1,10 @@
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}//ew
+}
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["dataProxy"]
 }
 
@@ -19,6 +19,8 @@ model Link {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   users       User[]
+  owner       User     @relation("profileRelation", fields: [ownerId], references: [id])
+  ownerId     String   @unique
 }
 
 model User {
@@ -27,8 +29,9 @@ model User {
   image     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  favorites Link[]
   role      Role     @default(USER)
+  favorites Link[]
+  profile   Link?    @relation("profileRelation")
 }
 
 enum Role {
