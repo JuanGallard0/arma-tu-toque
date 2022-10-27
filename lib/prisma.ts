@@ -1,14 +1,11 @@
 // /lib/prisma.ts
-//import { PrismaClient } from '@prisma/client'
-import { PrismaClient } from "@prisma/client/edge";
-const prisma = new PrismaClient();
-// use `prisma` in your application to read and write data in your DB
+import { PrismaClient } from "@prisma/client";
 
 // PrismaClient is attached to the `global` object in development to prevent
 // exhausting your database connection limit.
 // Learn more: https://pris.ly/d/help/next-js-best-practices
 
-//let prisma: PrismaClient;
+let prisma: PrismaClient;
 
 if (process.env.NODE_ENV === "production") {
   prisma = new PrismaClient();
