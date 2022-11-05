@@ -22,6 +22,18 @@ export const User = objectType({
           .favorites();
       },
     });
+    t.field("profile", {
+      type: Link,
+      async resolve(_parent, _args, ctx) {
+        return await ctx.prisma.user
+          .findUnique({
+            where: {
+              id: _parent.id,
+            },
+          })
+          .profile();
+      },
+    });
   },
 });
 
@@ -46,6 +58,27 @@ export const UserFavorites = extendType({
         });
         if (!user) throw new Error("Invalid user");
         return user.favorites;
+      },
+    });
+  },
+});
+
+export const UserProfile = extendType({
+  type: "Query",
+  definition(t) {
+    t.field("profile", {
+      type: "Link",
+      async resolve(_, _args, ctx) {
+        const user = await ctx.prisma.user.findUnique({
+          where: {
+            email: ctx.user.email,
+          },
+          include: {
+            profile: true,
+          },
+        });
+        if (!user) throw new Error("Invalid user");
+        return user.profile;
       },
     });
   },

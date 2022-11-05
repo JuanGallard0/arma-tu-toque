@@ -1,8 +1,5 @@
 import { nonNull, objectType, stringArg, extendType } from "nexus";
 import { connectionFromArraySlice, cursorToOffset } from "graphql-relay";
-import { User } from "./User";
-import { type } from "os";
-import { connect } from "http2";
 
 export const Link = objectType({
   name: "Link",
@@ -83,15 +80,18 @@ export const CreateLinkMutation = extendType({
             email: ctx.user.email,
           },
         });
+        /*
         if (!user || user.role !== "ADMIN") {
           throw new Error(`You do not have permission to perform action`);
         }
+      */
         const newLink = {
           title: args.title,
           url: args.url,
           imageUrl: args.imageUrl,
           category: args.category,
           description: args.description,
+          owner: { connect: { id: user.id } },
         };
 
         return await ctx.prisma.link.create({

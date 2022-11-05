@@ -2,12 +2,35 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useUser } from "@auth0/nextjs-auth0";
+import { gql, useQuery } from "@apollo/client";
+
+const ProfileQuery = gql`
+  query {
+    profile {
+      title
+      id
+      url
+      imageUrl
+      description
+      category
+    }
+  }
+`;
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const [color, setColor] = useState("transparent");
   const [textColor, setTextColor] = useState("white");
   const { user } = useUser();
+
+  const { data, loading, error } = useQuery(ProfileQuery);
+  let hasProfile;
+  try {
+    data.profile.title;
+    hasProfile = true;
+  } catch (error) {
+    hasProfile = false;
+  }
 
   const handleNav = () => {
     setNav(!nav);
@@ -35,6 +58,7 @@ const Navbar = () => {
         <Link href="/">
           <h1 style={{ color: `${textColor}` }} className="font-bold text-4xl">
             Arma tu toque
+            {hasProfile ? <p>{data.profile.title}</p> : <p>error</p>}
           </h1>
         </Link>
         {user ? (

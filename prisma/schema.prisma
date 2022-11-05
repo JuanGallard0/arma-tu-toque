@@ -19,7 +19,7 @@ model Link {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   users       User[]
-  owner       User     @relation(fields: [ownerId] ,references: [id] ,"profileRelation")
+  owner       User     @relation(fields: [ownerId] ,references: [id],"profileRelation")
   ownerId     String   @unique
 }
 
