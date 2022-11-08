@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const CreateLinkMutation = gql`
   mutation (
@@ -28,6 +29,8 @@ const CreateLinkMutation = gql`
 `;
 
 const Admin = () => {
+  const router = useRouter();
+
   const [createLink, { data, loading, error }] =
     useMutation(CreateLinkMutation);
   const {
@@ -67,11 +70,13 @@ const Admin = () => {
     const imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image[0].name}`;
     const variables = { title, url, category, description, imageUrl };
     try {
-      toast.promise(createLink({ variables }), {
-        loading: "Creating new link..",
-        success: "Link successfully created!🎉",
-        error: `Something went wrong 😥 Please try again -  ${error}`,
-      });
+      toast
+        .promise(createLink({ variables }), {
+          loading: "Creating new link..",
+          success: "Link successfully created!🎉",
+          error: `Something went wrong 😥 Please try again -  ${error}`,
+        })
+        .then(router.push("/explorer"));
     } catch (error) {
       console.error(error);
     }

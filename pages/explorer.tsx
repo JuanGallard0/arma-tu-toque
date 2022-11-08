@@ -101,7 +101,7 @@ function Home() {
             more
           </button>
         ) : (
-          <p className="my-10 text-center font-medium">
+          <p className="text-white my-10 text-center font-medium">
             ¡Has llegado al final!
           </p>
         )}

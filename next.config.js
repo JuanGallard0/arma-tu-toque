@@ -5,4 +5,4 @@ module.exports = {
     // Dangerously allow production builds to successfully complete even if your project has type errors.
     ignoreBuildErrors: true,
   },
-}
+};

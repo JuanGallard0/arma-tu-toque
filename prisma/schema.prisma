@@ -23,6 +23,23 @@ model Link {
   ownerId     String   @unique
 }
 
+model RFQ {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  address1    String
+  address2    String
+  time        Int
+  date        DateTime
+  type        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  sender      User     @relation(fields: [senderId], references: [id], "senderRelation")
+  senderId    String   @unique
+  receiver    User     @relation(fields: [receriverId], references: [id], "receiverRelation")
+  receriverId String   @unique
+}
+
 model User {
   id        String   @id @default(uuid())
   email     String?  @unique
@@ -32,6 +49,8 @@ model User {
   role      Role     @default(USER)
   favorites Link[]
   profile   Link?    @relation("profileRelation")
+  sentRFQs  RFQ[]    @relation("senderRelation")
+  receivedRFQs RFQ[] @relation("receiverRelation")
 }
 
 enum Role {

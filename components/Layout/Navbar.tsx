@@ -56,14 +56,25 @@ const Navbar = () => {
     >
       <div className="max-w-[1240px] m-auto flex justify-between items-center p-4 text-white">
         <Link href="/">
-          <h1 style={{ color: `${textColor}` }} className="font-bold text-4xl">
+          <h1
+            style={{ color: `${textColor}` }}
+            className="font-bold text-4xl cursor-pointer"
+          >
             Arma tu toque
-            {hasProfile ? <p>{data.profile.title}</p> : <p>error</p>}
           </h1>
         </Link>
         {user ? (
           <div>
             <ul style={{ color: `${textColor}` }} className="hidden sm:flex">
+              {hasProfile ? (
+                <li className="p-4">
+                  <Link href="/admin">Perfil</Link>
+                </li>
+              ) : (
+                <li className="p-4">
+                  <Link href="/admin">Inscripción músico</Link>
+                </li>
+              )}
               <li className="p-4">
                 <Link href="/api/auth/logout">Salir</Link>
               </li>
