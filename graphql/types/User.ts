@@ -1,6 +1,7 @@
 import { enumType, intArg, objectType, stringArg } from "nexus";
 import { extendType } from "nexus";
 import { Link } from "./Link";
+import { RFQ } from "./RFQ";
 
 export const User = objectType({
   name: "User",
@@ -32,6 +33,30 @@ export const User = objectType({
             },
           })
           .profile();
+      },
+    });
+    t.list.field("sentRFQs", {
+      type: RFQ,
+      async resolve(_parent, _args, ctx) {
+        return await ctx.prisma.user
+          .findUnique({
+            where: {
+              id: _parent.id,
+            },
+          })
+          .sentRFQs();
+      },
+    });
+    t.list.field("receivedRFQs", {
+      type: RFQ,
+      async resolve(_parent, _args, ctx) {
+        return await ctx.prisma.user
+          .findUnique({
+            where: {
+              id: _parent.id,
+            },
+          })
+          .receivedRFQs();
       },
     });
   },

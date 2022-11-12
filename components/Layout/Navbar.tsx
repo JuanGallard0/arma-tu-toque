@@ -68,7 +68,7 @@ const Navbar = () => {
             <ul style={{ color: `${textColor}` }} className="hidden sm:flex">
               {hasProfile ? (
                 <li className="p-4">
-                  <Link href="/admin">Perfil</Link>
+                  <Link href="/admin">Mi perfil</Link>
                 </li>
               ) : (
                 <li className="p-4">
