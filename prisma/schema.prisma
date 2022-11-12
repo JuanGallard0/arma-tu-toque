@@ -32,6 +32,7 @@ model RFQ {
   time        Int
   date        DateTime
   type        String
+  accepeted   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   sender      User     @relation(fields: [senderId], references: [id], "senderRelation")
