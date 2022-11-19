@@ -1,5 +1,6 @@
-import { nonNull, objectType, stringArg, extendType } from "nexus";
+import { nonNull, objectType, stringArg, extendType, intArg } from "nexus";
 import { connectionFromArraySlice, cursorToOffset } from "graphql-relay";
+import { NexusNonNullDef } from "nexus/dist/core";
 
 export const RFQ = objectType({
   name: "RFQ",
@@ -11,9 +12,56 @@ export const RFQ = objectType({
     t.string("address2");
     t.int("time");
     t.int("date");
+    t.string("type");
     t.boolean("accepted");
     t.string("senderId");
     t.string("receiverId");
+  },
+});
+
+export const CreateRFQMutation = extendType({
+  type: "Mutation",
+  definition(t) {
+    t.nonNull.field("createRFQ", {
+      type: RFQ,
+      args: {
+        title: nonNull(stringArg()),
+        description: nonNull(stringArg()),
+        address1: nonNull(stringArg()),
+        address2: stringArg(),
+        time: nonNull(intArg()),
+        date: nonNull(intArg()),
+        type: nonNull(stringArg()),
+        receiverId: nonNull(stringArg()),
+      },
+      async resolve(_parent, args, ctx) {
+        const user = await ctx.prisma.user.findUnique({
+          where: {
+            email: ctx.user.email,
+          },
+        });
+        const receiver = await ctx.prisma.user.findUnique({
+          where: {
+            id: args.receiverId,
+          },
+        });
+        const newRFQ = {
+          title: args.title,
+          description: args.description,
+          address1: args.address1,
+          address2: args.address2,
+          time: args.time,
+          date: args.date,
+          type: args.type,
+          sender: { connect: { id: user.id } },
+          receiver: { connect: { id: receiver.id } },
+        };
+
+        return await ctx.prisma.rFQ.create({
+          data: newRFQ,
+        });
+      },
+    });
   },
 });
 
@@ -65,44 +113,6 @@ export const LinkByIDQuery = extendType({
 });
 
 // create link
-export const CreateLinkMutation = extendType({
-  type: "Mutation",
-  definition(t) {
-    t.nonNull.field("createLink", {
-      type: Link,
-      args: {
-        title: nonNull(stringArg()),
-        url: nonNull(stringArg()),
-        imageUrl: nonNull(stringArg()),
-        category: nonNull(stringArg()),
-        description: nonNull(stringArg()),
-      },
-      async resolve(_parent, args, ctx) {
-        const user = await ctx.prisma.user.findUnique({
-          where: {
-            email: ctx.user.email,
-          },
-        });
-        if (!user || user.role !== "ADMIN") {
-          throw new Error(`You do not have permission to perform action`);
-        }
-        const newLink = {
-          title: args.title,
-          url: args.url,
-          imageUrl: args.imageUrl,
-          category: args.category,
-          description: args.description,
-          owner: { connect: { id: user.id } },
-        };
-
-        return await ctx.prisma.link.create({
-          data: newLink,
-        });
-      },
-    });
-  },
-});
-
 // update Link
 export const UpdateLinkMutation = extendType({
   type: "Mutation",

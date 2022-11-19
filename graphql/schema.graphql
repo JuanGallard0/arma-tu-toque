@@ -36,6 +36,7 @@ type LinkEdge {
 type Mutation {
   bookmarkLink(id: String): Link
   createLink(category: String!, description: String!, imageUrl: String!, title: String!, url: String!): Link!
+  createRFQ(address1: String!, address2: String, date: Int!, description: String!, receiverId: String!, time: Int!, title: String!, type: String!): RFQ!
   deleteLink(id: String!): Link!
   updateLink(category: String, description: String, id: String, imageUrl: String, title: String, url: String): Link!
 }
@@ -84,6 +85,20 @@ type Query {
   profile: Link
 }
 
+type RFQ {
+  accepted: Boolean
+  address1: String
+  address2: String
+  date: Int
+  description: String
+  id: String
+  receiverId: String
+  senderId: String
+  time: Int
+  title: String
+  type: String
+}
+
 enum Role {
   ADMIN
   USER
@@ -96,5 +111,7 @@ type User {
   image: String
   name: String
   profile: Link
+  receivedRFQs: [RFQ]
   role: Role
+  sentRFQs: [RFQ]
 }
