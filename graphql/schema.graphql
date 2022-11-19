@@ -36,7 +36,7 @@ type LinkEdge {
 type Mutation {
   bookmarkLink(id: String): Link
   createLink(category: String!, description: String!, imageUrl: String!, title: String!, url: String!): Link!
-  createRFQ(address1: String!, address2: String, date: String!, description: String!, receiverId: String!, time: Int!, title: String!, type: String!): RFQ!
+  createRFQ(address1: String!, address2: String, date: String!, description: String!, receiverId: String!, time: String!, title: String!, type: String!): RFQ!
   deleteLink(id: String!): Link!
   updateLink(category: String, description: String, id: String, imageUrl: String, title: String, url: String): Link!
 }
@@ -94,7 +94,7 @@ type RFQ {
   id: String
   receiverId: String
   senderId: String
-  time: Int
+  time: String
   title: String
   type: String
 }

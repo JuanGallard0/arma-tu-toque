@@ -30,7 +30,7 @@ model RFQ {
   address1    String
   address2    String
   time        String
-  date        DateTime
+  date        String
   type        String
   accepted    Boolean  @default(false)
   createdAt   DateTime @default(now())
