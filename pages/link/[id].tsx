@@ -22,8 +22,8 @@ const CreateRFQMutation = gql`
     $description: String!
     $address1: String!
     $address2: String!
-    $time: Int!
-    $date: Int!
+    $time: String!
+    $date: String!
     $type: String!
     $receiverId: String!
   ) {
@@ -78,7 +78,7 @@ const Link = ({ link }) => {
       toast.promise(createRFQ({ variables }), {
         loading: "Creating new RFQ..",
         success: "RFQ successfully created!🎉",
-        error: `Something went wrong 😥 Please try again -  ${error}`,
+        error: `Something went wrong 😥 Please try again -  ${error.graphQLErrors}`,
       });
     } catch (error) {
       console.error(error);
@@ -165,6 +165,7 @@ const Link = ({ link }) => {
                   placeholder="Título"
                   name="title"
                   type="text"
+                  value={"test"}
                   {...register("title", { required: true })}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
@@ -176,6 +177,7 @@ const Link = ({ link }) => {
                   {...register("description", { required: true })}
                   name="description"
                   type="text"
+                  value={"test"}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
@@ -187,6 +189,7 @@ const Link = ({ link }) => {
                   {...register("address1", { required: true })}
                   name="address1"
                   type="text"
+                  value={"test"}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
@@ -194,16 +197,17 @@ const Link = ({ link }) => {
                 <span className="text-gray-700">Línea 2</span>
                 <input
                   placeholder="address2"
-                  {...register("address2", { required: true })}
+                  {...register("address2", { required: false })}
                   name="address2"
                   type="text"
+                  value={"test"}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
               <label className="block">
                 <span className="text-gray-700">Duración del evento</span>
                 <input
-                  placeholder="time"
+                  placeholder="Duración del evento"
                   {...register("time", { required: true })}
                   name="time"
                   type="number"
@@ -213,10 +217,11 @@ const Link = ({ link }) => {
               <label className="block">
                 <span className="text-gray-700">Fecha del evento</span>
                 <input
-                  placeholder="date"
+                  placeholder="Fecha del evento"
                   {...register("date", { required: true })}
                   name="date"
                   type="datetime-local"
+                  value={"2022-11-29T15:45"}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
@@ -227,6 +232,7 @@ const Link = ({ link }) => {
                   {...register("type", { required: true })}
                   name="type"
                   type="text"
+                  value={"test"}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>

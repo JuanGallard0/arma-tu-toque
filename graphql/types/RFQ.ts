@@ -1,6 +1,5 @@
 import { nonNull, objectType, stringArg, extendType, intArg } from "nexus";
 import { connectionFromArraySlice, cursorToOffset } from "graphql-relay";
-import { NexusNonNullDef } from "nexus/dist/core";
 
 export const RFQ = objectType({
   name: "RFQ",
@@ -10,8 +9,8 @@ export const RFQ = objectType({
     t.string("description");
     t.string("address1");
     t.string("address2");
-    t.int("time");
-    t.int("date");
+    t.string("time");
+    t.string("date");
     t.string("type");
     t.boolean("accepted");
     t.string("senderId");
@@ -29,8 +28,8 @@ export const CreateRFQMutation = extendType({
         description: nonNull(stringArg()),
         address1: nonNull(stringArg()),
         address2: stringArg(),
-        time: nonNull(intArg()),
-        date: nonNull(intArg()),
+        time: nonNull(stringArg()),
+        date: nonNull(stringArg()),
         type: nonNull(stringArg()),
         receiverId: nonNull(stringArg()),
       },
@@ -40,11 +39,7 @@ export const CreateRFQMutation = extendType({
             email: ctx.user.email,
           },
         });
-        const receiver = await ctx.prisma.user.findUnique({
-          where: {
-            id: args.receiverId,
-          },
-        });
+
         const newRFQ = {
           title: args.title,
           description: args.description,
@@ -54,7 +49,7 @@ export const CreateRFQMutation = extendType({
           date: args.date,
           type: args.type,
           sender: { connect: { id: user.id } },
-          receiver: { connect: { id: receiver.id } },
+          receiver: { connect: { id: args.receiverId } },
         };
 
         return await ctx.prisma.rFQ.create({
