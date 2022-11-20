@@ -77,7 +77,7 @@ const Link = ({ link }) => {
     try {
       toast.promise(createRFQ({ variables }), {
         loading: "Creating new RFQ..",
-        success: "RFQ successfully created!🎉",
+        success: "Solicitud enviada con éxito!🎉",
         error: `Something went wrong 😥 Please try again -  ${error.graphQLErrors}`,
       });
     } catch (error) {
