@@ -2,7 +2,7 @@ import React from "react";
 import prisma from "../../lib/prisma";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import toast, { Toaster } from "react-hot-toast";
 
 const BookmarkLinkMutation = gql`
@@ -45,6 +45,13 @@ const CreateRFQMutation = gql`
       date
       type
       receiverId
+    }
+  }
+`;
+const FavoritesQuery = gql`
+  query {
+    favorites {
+      id
     }
   }
 `;
@@ -101,10 +108,10 @@ const Link = ({ link }) => {
   };
 
   return (
-    <div className="prose container m-40 px-8 bg-gray-100">
+    <div className="inline-flex">
       <Toaster />
       {!isCreatingRFQ ? (
-        <div>
+        <div className="prose container m-40 px-8 bg-gray-100">
           <button
             onClick={() => toggleCreateRFQ()}
             className="my-4 capitalize bg-blue-500 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-600 mr-5"
@@ -134,13 +141,14 @@ const Link = ({ link }) => {
           <h1>{link.title}</h1>
           <img src={link.imageUrl} className="shadow-lg rounded-lg" />
           <p>{link.description}</p>
-          <a className="text-blue-500" href={`${link.url}`}>
-            {link.url}
-          </a>
+
+          <h4>Instrumentos</h4>
+
+          <p className="text-gray-600">{link.url}</p>
         </div>
       ) : (
-        <div>
-          <section>
+        <div className="container m-40 px-8 bg-gray-100 flex flex-wrap">
+          <section className=" w-2/5">
             <button
               onClick={() => toggleCreateRFQ()}
               className="my-4 capitalize bg-blue-500 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-600 mr-5"
@@ -150,13 +158,13 @@ const Link = ({ link }) => {
             <h1>{link.title}</h1>
             <img src={link.imageUrl} className="shadow-lg rounded-lg" />
             <p>{link.description}</p>
-            <a className="text-blue-500" href={`${link.url}`}>
-              {link.url}
-            </a>
+
+            <h4>Instrumentos</h4>
+            <p className="text-gray-600">{link.url}</p>
           </section>
-          <section>
+          <section className="w-3/5">
             <form
-              className="grid grid-cols-1 gap-y-6 shadow-lg p-8 rounded-lg"
+              className="grid grid-cols-1 gap-y-6  p-8 "
               onSubmit={handleSubmit(onSubmit)}
             >
               <label className="block">

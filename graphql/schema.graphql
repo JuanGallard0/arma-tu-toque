@@ -83,6 +83,7 @@ type Query {
     last: Int
   ): LinkConnection
   profile: Link
+  receivedRFQs: [RFQ]
 }
 
 type RFQ {

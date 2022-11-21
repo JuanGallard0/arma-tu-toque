@@ -20,9 +20,9 @@ const Favorites = () => {
   if (error) return <p>Oops! Algo salió mal{error}</p>;
   return (
     <div className="mx-auto my-20 max-w-5xl px-10">
-      <h1 className="text-3xl font-medium my-5">My Favorites</h1>
+      <h1 className="text-3xl font-medium my-5 text-white">Mis favoritos</h1>
       {loading ? (
-        <p>Cargando...</p>
+        <p className="text-white">Cargando...</p>
       ) : (
         <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {data.favorites.length === 0 ? (

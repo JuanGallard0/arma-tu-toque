@@ -70,13 +70,12 @@ const Admin = () => {
     const imageUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image[0].name}`;
     const variables = { title, url, category, description, imageUrl };
     try {
-      toast
-        .promise(createLink({ variables }), {
-          loading: "Creating new link..",
-          success: "Link successfully created!🎉",
-          error: `Something went wrong 😥 Please try again -  ${error}`,
-        })
-        .then(router.push("/explorer"));
+      toast.promise(createLink({ variables }), {
+        loading: "Creating new link..",
+        success: "Link successfully created!🎉",
+        error: `Something went wrong 😥 Please try again -  ${error}`,
+      });
+      // .then(router.push("/explorer"));
     } catch (error) {
       console.error(error);
     }
@@ -111,9 +110,9 @@ const Admin = () => {
           />
         </label>
         <label className="block">
-          <span className="text-gray-700">URL a red social</span>
+          <span className="text-gray-700">Instrumentos</span>
           <input
-            placeholder="https://ejemplo.com"
+            placeholder="Guitarra, Piano,..."
             {...register("url", { required: true })}
             name="url"
             type="text"

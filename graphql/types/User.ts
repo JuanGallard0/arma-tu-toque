@@ -88,6 +88,27 @@ export const UserFavorites = extendType({
   },
 });
 
+export const UserRFQs = extendType({
+  type: "Query",
+  definition(t) {
+    t.list.field("receivedRFQs", {
+      type: "RFQ",
+      async resolve(_, _args, ctx) {
+        const user = await ctx.prisma.user.findUnique({
+          where: {
+            email: ctx.user.email,
+          },
+          include: {
+            receivedRFQs: true,
+          },
+        });
+        if (!user) throw new Error("Invalid user");
+        return user.receivedRFQs;
+      },
+    });
+  },
+});
+
 export const UserProfile = extendType({
   type: "Query",
   definition(t) {
@@ -120,6 +141,33 @@ export const BookmarkLink = extendType({
       async resolve(_, args, ctx) {
         const link = await ctx.prisma.link.findUnique({
           where: { id: args.id },
+        });
+
+        const user = await ctx.prisma.user.findUnique({
+          where: {
+            email: ctx.user.email,
+          },
+          include: {
+            favorites: true,
+          },
+        });
+
+        user.favorites.map(async ({ id }) => {
+          if (id == args.id) {
+            await ctx.prisma.user.update({
+              where: {
+                email: ctx.user.email,
+              },
+              data: {
+                favorites: {
+                  disconnect: {
+                    id: link.id,
+                  },
+                },
+              },
+            });
+            return link;
+          }
         });
 
         await ctx.prisma.user.update({

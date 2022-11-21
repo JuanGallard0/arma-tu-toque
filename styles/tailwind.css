@@ -3,12 +3,11 @@
 @tailwind utilities;
 
 /*Components*/
-@import "./components/Hero.css";
 
 html {
   scroll-behavior: smooth;
   font-family: "Rubik", sans-serif;
-  background-image: url("../public/background.jpg");
+  background-color: rgb(17 24 39);
 }
 
 .custom-img {

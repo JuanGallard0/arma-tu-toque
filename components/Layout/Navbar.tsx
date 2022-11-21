@@ -66,6 +66,12 @@ const Navbar = () => {
         {user ? (
           <div>
             <ul style={{ color: `${textColor}` }} className="hidden sm:flex">
+              <li className="p-4">
+                <Link href="/explorer">Explorar</Link>
+              </li>
+              <li className="p-4">
+                <Link href="/favorites">Mis favoritos</Link>
+              </li>
               {hasProfile ? (
                 <li className="p-4">
                   <Link href="/admin">Mi perfil</Link>
