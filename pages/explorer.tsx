@@ -3,7 +3,6 @@ import { gql, useQuery, useMutation } from "@apollo/client";
 import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
 import { AwesomeLink } from "../components/AwesomeLink";
-import { useRouter } from "next/router";
 
 const AllLinksQuery = gql`
   query allLinksQuery($first: Int, $after: String) {
