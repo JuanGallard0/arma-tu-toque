@@ -48,13 +48,6 @@ const CreateRFQMutation = gql`
     }
   }
 `;
-const FavoritesQuery = gql`
-  query {
-    favorites {
-      id
-    }
-  }
-`;
 
 const Link = ({ link }) => {
   const [isLoading, setIsLoading] = useState(false);
