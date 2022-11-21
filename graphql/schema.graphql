@@ -8,6 +8,7 @@ type Link {
   id: String
   imageUrl: String
   index: Int
+  ownerId: String
   title: String
   url: String
   userId: Int

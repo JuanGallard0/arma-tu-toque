@@ -166,7 +166,7 @@ const Link = ({ link }) => {
                   placeholder="Título"
                   name="title"
                   type="text"
-                  value={"test"}
+                  //value={"test"}
                   {...register("title", { required: true })}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
@@ -178,7 +178,7 @@ const Link = ({ link }) => {
                   {...register("description", { required: true })}
                   name="description"
                   type="text"
-                  value={"test"}
+                  //value={"test"}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
@@ -190,7 +190,7 @@ const Link = ({ link }) => {
                   {...register("address1", { required: true })}
                   name="address1"
                   type="text"
-                  value={"test"}
+                  //value={"test"}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
@@ -201,7 +201,7 @@ const Link = ({ link }) => {
                   {...register("address2", { required: false })}
                   name="address2"
                   type="text"
-                  value={"test"}
+                  //value={"test"}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
@@ -222,7 +222,7 @@ const Link = ({ link }) => {
                   {...register("date", { required: true })}
                   name="date"
                   type="datetime-local"
-                  value={"2022-11-29T15:45"}
+                  //value={"2022-11-29T15:45"}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
@@ -233,7 +233,7 @@ const Link = ({ link }) => {
                   {...register("type", { required: true })}
                   name="type"
                   type="text"
-                  value={"test"}
+                  //value={"test"}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
