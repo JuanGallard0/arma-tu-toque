@@ -29,7 +29,7 @@ const CreateLinkMutation = gql`
 `;
 
 const Admin = () => {
-  const router = useRouter();
+  //const router = useRouter();
 
   const [createLink, { data, loading, error }] =
     useMutation(CreateLinkMutation);
@@ -47,7 +47,6 @@ const Admin = () => {
     const data = await res.json();
     const formData = new FormData();
 
-    // @ts-ignore
     Object.entries({ ...data.fields, file }).forEach(([key, value]) => {
       formData.append(key, value);
     });
