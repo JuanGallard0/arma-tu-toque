@@ -274,7 +274,6 @@ const Link = ({ link }) => {
   );
 };
 
-
 export default Link;
 
 export const getServerSideProps = async ({ params }) => {

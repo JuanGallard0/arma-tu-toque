@@ -26,7 +26,7 @@ const Favorites = () => {
       ) : (
         <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {data.favorites.length === 0 ? (
-            <p className="text-2xl font-medium">
+            <p className="text-2xl font-medium text-white">
               No has seleccionado ningún perfil aún 👀
             </p>
           ) : (
