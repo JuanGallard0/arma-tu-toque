@@ -81,13 +81,13 @@ const Admin = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-md py-12 p-5 bg-gray-100 m-36 rounded-lg">
+    <div className="container mx-auto max-w-md py-12 p-5 bg-gray-100 m-36 rounded-lg grid grid-cols-1 gap-y-6 shadow-lg">
       <Toaster />
-      <h1 className="text-3xl font-medium my-5">Crear un nuevo perfil</h1>
+      <h2 className="text-3xl font-medium my-5">Crear un nuevo perfil</h2>
       <form
-        className="grid grid-cols-1 gap-y-6 shadow-lg p-8 rounded-lg"
         onSubmit={handleSubmit(onSubmit)}
       >
+        <div className="mb-6">
         <label className="block">
           <span className="text-gray-700">Nombre</span>
           <input
@@ -98,6 +98,8 @@ const Admin = () => {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
+        </div>
+        <div className="mb-6">
         <label className="block">
           <span className="text-gray-700">Descripción</span>
           <input
@@ -108,6 +110,8 @@ const Admin = () => {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
+        </div>
+        <div className="mb-6">
         <label className="block">
           <span className="text-gray-700">Instrumentos</span>
           <input
@@ -118,6 +122,8 @@ const Admin = () => {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
+        </div>
+        <div className="mb-6">
         <label className="block">
           <span className="text-gray-700">Categoría</span>
           <input
@@ -128,19 +134,18 @@ const Admin = () => {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
-        <label className="block">
-          <span className="text-gray-700">
-            Selecciona una imagen .png o .jpg (max 1MB).
-          </span>
+        </div>
+        <label className="block mb-2 text-sm font-medium text-gray-900" >Seleccionar Imagen</label>
           <input
             {...register("image", { required: true })}
             onChange={uploadPhoto}
             type="file"
             accept="image/png, image/jpeg"
             name="image"
+            className="block w-full mb-5 text-sm text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 focus:outline-none"
           />
-        </label>
-
+        <p className="mt-1 text-sm text-gray-500 " id="file_input_help">PNG o JPG (MAX. 1MB).</p>
+        
         <button
           disabled={loading}
           type="submit"

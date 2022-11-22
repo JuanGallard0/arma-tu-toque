@@ -74,7 +74,7 @@ const Navbar = () => {
               </li>
               {hasProfile ? (
                 <li className="p-4">
-                  <Link href="/admin">Mi perfil</Link>
+                  <Link href="/profile">Mi perfil</Link>
                 </li>
               ) : (
                 <li className="p-4">
