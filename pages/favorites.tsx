@@ -1,6 +1,7 @@
 import React from "react";
 import { AwesomeLink } from "../components/AwesomeLink";
 import { gql, useQuery } from "@apollo/client";
+import Link from "next/link";
 
 const FavoritesQuery = gql`
   query {
@@ -26,12 +27,13 @@ const Favorites = () => {
       ) : (
         <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {data.favorites.length === 0 ? (
-            <p className="text-2xl font-medium text-white">
+            <p className="text-2xl font-medium">
               No has seleccionado ningún perfil aún 👀
             </p>
           ) : (
             data.favorites.map((link) => (
-              <div key={link.id}>
+              <Link href={`/link/${link.id}`} key={link.id}>
+                <a>
                 <AwesomeLink
                   title={link.title}
                   description={link.description}
@@ -39,8 +41,8 @@ const Favorites = () => {
                   imageUrl={link.imageUrl}
                   url={link.url}
                   id={link.id}
-                />
-              </div>
+                /></a>
+              </Link>
             ))
           )}
         </div>

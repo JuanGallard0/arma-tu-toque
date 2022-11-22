@@ -3,7 +3,7 @@ import Adelanto from "../components/Layout/Adelanto";
 import Hero from "../components/Layout/Hero";
 import Why from "../components/Layout/Why";
 
-function Home() {
+const Home = () => {
   return (
     <div className="Index">
       <Head>

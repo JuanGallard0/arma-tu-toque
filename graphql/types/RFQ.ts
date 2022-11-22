@@ -62,32 +62,6 @@ export const CreateRFQMutation = extendType({
 
 /*
 // get ALl Links
-export const LinksQuery = extendType({
-  type: "Query",
-  definition(t) {
-    t.connectionField("links", {
-      type: Link,
-      resolve: async (_, { after, first }, ctx) => {
-        const offset = after ? cursorToOffset(after) + 1 : 0;
-        if (isNaN(offset)) throw new Error("cursor is invalid");
-
-        const [totalCount, items] = await Promise.all([
-          ctx.prisma.link.count(),
-          ctx.prisma.link.findMany({
-            take: first,
-            skip: offset,
-          }),
-        ]);
-
-        return connectionFromArraySlice(
-          items,
-          { first, after },
-          { sliceStart: offset, arrayLength: totalCount }
-        );
-      },
-    });
-  },
-});
 // get Unique Link
 export const LinkByIDQuery = extendType({
   type: "Query",

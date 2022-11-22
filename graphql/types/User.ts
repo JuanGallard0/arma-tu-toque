@@ -119,8 +119,8 @@ export const UserProfile = extendType({
           where: {
             email: ctx.user.email,
           },
-          include: {
-            profile: true,
+          select: {
+            profile:true
           },
         });
         if (!user) throw new Error("Invalid user");

@@ -8,11 +8,6 @@ const ProfileQuery = gql`
   query {
     profile {
       title
-      id
-      url
-      imageUrl
-      description
-      category
     }
   }
 `;
@@ -71,6 +66,9 @@ const Navbar = () => {
               </li>
               <li className="p-4">
                 <Link href="/favorites">Mis favoritos</Link>
+              </li>
+              <li className="p-4">
+                <Link href="/requests">Solicitudes recibidas</Link>
               </li>
               {hasProfile ? (
                 <li className="p-4">

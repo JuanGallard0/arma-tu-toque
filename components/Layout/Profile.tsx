@@ -1,6 +1,6 @@
 import React from "react";
 
-function Profile() {
+const Profile = ({title,url,imageUrl,description,category}) => {
   return (
     <div className="bg-slate-700">
       <div className="container mx-auto p-24">
@@ -10,21 +10,19 @@ function Profile() {
               <div className="image overflow-hidden">
                 <img
                   className="h-auto w-full mx-auto rounded-full"
-                  src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
+                  src={imageUrl}
                   alt=""
                 />
               </div>
 
               <h1 className="text-gray-900 font-bold text-xl leading-10 my-4 text-center">
-                Juan Pérez
+                {title}
               </h1>
               <h3 className="text-gray-600 font-lg text-semibold leading-8">
                 Músico
               </h3>
               <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur
-                non deserunt
+                {description}
               </p>
               <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                 <li className="flex items-center py-3">
@@ -37,7 +35,7 @@ function Profile() {
                 </li>
                 <li className="flex items-center py-3">
                   <span>Género Musical</span>
-                  <span className="ml-auto">Cumbia</span>
+                  <span className="ml-auto">{category}</span>
                 </li>
                 <li className="flex items-center py-3">
                   <a
