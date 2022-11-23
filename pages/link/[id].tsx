@@ -133,11 +133,12 @@ const Link = ({ link }) => {
           </button>
           <h1>{link.title}</h1>
           <img src={link.imageUrl} className="shadow-lg rounded-lg" />
-          <p>{link.description}</p>
+          <p className="text-gray-900 text-xl mb-2">Descripción: </p>
+          <p className="text-gray-900 text-xl font-bold mb-2">{link.description}</p>
 
-          <h4>Instrumentos</h4>
+          <h2>Instrumentos</h2>
 
-          <p className="text-gray-600">{link.url}</p>
+          <p className="text-gray-900 text-xl mb-8">{link.url}</p>
         </div>
       ) : (
         <div className="container m-40 px-8 bg-gray-100 flex flex-wrap border-4 border-opacity-60 rounded-lg overflow-hidden">
@@ -164,6 +165,17 @@ const Link = ({ link }) => {
                 <span className="text-gray-700">Título</span>
                 <input
                   placeholder="Título"
+                  name="title"
+                  type="text"
+                  //value={"test"}
+                  {...register("title", { required: true })}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                />
+              </label>
+              <label className="block">
+                <span className="text-gray-700">Nombre persona/empresa que contrata</span>
+                <input
+                  placeholder="Persona/Empresa"
                   name="title"
                   type="text"
                   //value={"test"}
