@@ -8,7 +8,7 @@ type Link {
   description: String
   email: String
   firstName: String
-  hasInstruments: Boolean
+  hasInstruments: String
   id: String
   imageUrl: String
   index: Int
@@ -43,7 +43,7 @@ type LinkEdge {
 
 type Mutation {
   bookmarkLink(id: String): Link
-  createLink(birthDate: String, category: String!, description: String!, email: String, firstName: String, hasInstruments: Boolean, imageUrl: String!, instruments: String, lastName: String, state: String, title: String!, url: String!): Link!
+  createLink(birthDate: String, category: String!, description: String!, email: String, firstName: String, hasInstruments: String, imageUrl: String!, instruments: String, lastName: String, state: String, title: String!, url: String!): Link!
   createRFQ(address1: String!, address2: String, date: String!, description: String!, receiverId: String!, time: String!, title: String!, type: String!): RFQ!
   deleteLink(id: String!): Link!
   updateLink(category: String, description: String, id: String, imageUrl: String, title: String, url: String): Link!

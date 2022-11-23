@@ -1,6 +1,19 @@
 import React from "react";
 
-const Profile = ({title,url,imageUrl,description,category}) => {
+const Profile = ({
+  title,
+  url,
+  imageUrl,
+  description,
+  category,
+  firstName,
+  lastName,
+  email,
+  birthDate,
+  state,
+  hasInstruments,
+  instruments,
+}) => {
   return (
     <div className="bg-slate-700">
       <div className="container mx-auto p-24">
@@ -19,7 +32,7 @@ const Profile = ({title,url,imageUrl,description,category}) => {
                 {title}
               </h1>
               <h3 className="text-gray-600 font-lg text-semibold leading-8">
-                Músico
+                {instruments}
               </h3>
               <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">
                 {description}
@@ -97,15 +110,15 @@ const Profile = ({title,url,imageUrl,description,category}) => {
                 <div className="grid md:grid-cols-2 text-md py-6 px-2">
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">Nombre</div>
-                    <div className="px-4 py-2">Juan</div>
+                    <div className="px-4 py-2">{firstName}</div>
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">Apellido</div>
-                    <div className="px-4 py-2">Pérez</div>
+                    <div className="px-4 py-2">{lastName}</div>
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">Descripcion</div>
-                    <div className="px-4 py-2">Lorem ipsum</div>
+                    <div className="px-4 py-2">{description}</div>
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">
@@ -115,13 +128,13 @@ const Profile = ({title,url,imageUrl,description,category}) => {
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">Departamento</div>
-                    <div className="px-4 py-2">Morazan</div>
+                    <div className="px-4 py-2">{state}</div>
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">
                       Tiene sus propios instrumentos
                     </div>
-                    <div className="px-4 py-2">Si</div>
+                    <div className="px-4 py-2">{hasInstruments}</div>
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">
@@ -132,7 +145,7 @@ const Profile = ({title,url,imageUrl,description,category}) => {
                         className="text-blue-800"
                         href="mailto:jane@example.com"
                       >
-                        jane@example.com
+                        {email}
                       </a>
                     </div>
                   </div>
@@ -140,7 +153,7 @@ const Profile = ({title,url,imageUrl,description,category}) => {
                     <div className="px-4 py-2 font-semibold">
                       Fecha de nacimiento
                     </div>
-                    <div className="px-4 py-2">Feb 06, 1998</div>
+                    <div className="px-4 py-2">{birthDate}</div>
                   </div>
                 </div>
               </div>
@@ -215,15 +228,7 @@ const Profile = ({title,url,imageUrl,description,category}) => {
                   <ul className="list-inside space-y-2">
                     <li>
                       <div className="text-teal-600">Facebook</div>
-                      <div className="text-gray-500 text-xs">
-                        www.facebook.com
-                      </div>
-                    </li>
-                    <li>
-                      <div className="text-teal-600">Instagram</div>
-                      <div className="text-gray-500 text-xs">
-                        www.instagram.com
-                      </div>
+                      <div className="text-gray-500 text-xs">{url}</div>
                     </li>
                   </ul>
                 </div>
@@ -234,6 +239,6 @@ const Profile = ({title,url,imageUrl,description,category}) => {
       </div>
     </div>
   );
-}
+};
 
 export default Profile;

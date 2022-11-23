@@ -20,11 +20,13 @@ const Navbar = () => {
 
   const { data, loading, error } = useQuery(ProfileQuery);
   let hasProfile;
-  try {
-    data.profile.title;
-    hasProfile = true;
-  } catch (error) {
-    hasProfile = false;
+  if (!loading) {
+    try {
+      data.profile.title;
+      hasProfile = true;
+    } catch (error) {
+      hasProfile = false;
+    }
   }
 
   const handleNav = () => {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import toast, { Toaster } from "react-hot-toast";
+import router, { useRouter } from "next/router";
 
 const CreateLinkMutation = gql`
   mutation (
@@ -49,7 +50,7 @@ const CreateLinkMutation = gql`
 `;
 
 const Admin = () => {
-  //const router = useRouter();
+  const router = useRouter();
 
   const [createLink, { data, loading, error }] =
     useMutation(CreateLinkMutation);
@@ -118,9 +119,8 @@ const Admin = () => {
       toast.promise(createLink({ variables }), {
         loading: "Creating new link..",
         success: "Link successfully created!🎉",
-        error: `Something went wrong 😥 Please try again -  ${error}`,
+        error: `Something went wrong 😥 Please try again -  ${error.message}`,
       });
-      // .then(router.push("/explorer"));
     } catch (error) {
       console.error(error);
     }
@@ -238,8 +238,8 @@ const Admin = () => {
                   {...register("hasInstruments", { required: true })}
                   id="integration_city_id"
                 >
-                  <option value="true">Si</option>
-                  <option value="false">No</option>
+                  <option value="Si">Si</option>
+                  <option value="No">No</option>
                 </select>
               </div>
               <div className="mb-3 space-y-2 w-full text-xs">

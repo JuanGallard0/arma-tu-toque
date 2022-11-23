@@ -18,7 +18,7 @@ export const Link = objectType({
     t.string("email");
     t.string("birthDate");
     t.string("state");
-    t.boolean("hasInstruments");
+    t.string("hasInstruments");
     t.string("instruments");
   },
 });
