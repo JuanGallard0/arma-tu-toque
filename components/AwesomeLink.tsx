@@ -26,7 +26,7 @@ export const AwesomeLink = ({
           <h1 className="text-2xl font-semibold mb-3">{title}</h1>
           <p className="leading-relaxed mb-3">{description}</p>
             <div className="flex">
-              <FaGuitar /> <p className="text-gray-600">{url}</p>
+              <FaGuitar /> <p className="leading-relaxed mb-3">{url}</p>
             </div>
         </div>
       </div>
