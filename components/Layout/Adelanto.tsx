@@ -59,7 +59,7 @@ function Adelanto() {
             <div className="h-full border-4 border-gray-200 border-opacity-60 rounded-lg overflow-hidden bg-white">
               <img
                 className="lg:h-72 md:h-48 w-full object-cover object-center"
-                src="https://images.unsplash.com/photo-1462965326201-d02e4f455804?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                src="https://images.pexels.com/photos/1637108/pexels-photo-1637108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt=""
               />
 
@@ -67,7 +67,7 @@ function Adelanto() {
                 <h2 className="text-base font-medium text-indigo-300 mb-1">
                   Banda
                 </h2>
-                <h1 className="text-2xl font-semibold mb-3">Iron Weasel</h1>
+                <h1 className="text-2xl font-semibold mb-3">The Be Sharps</h1>
                 <p className="leading-relaxed mb-3">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Aperiam modi, expedita quos doloremque autem ipsum itaque
