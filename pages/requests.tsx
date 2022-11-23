@@ -22,9 +22,11 @@ const requests = () => {
   if (error) return <p>Oops! Algo salió mal{error}</p>;
   return (
     <div className="mx-auto my-20 max-w-5xl px-10">
-      <h1 className="text-3xl font-medium my-5 text-white">Solicitudes recibidas</h1>
+      <h1 className="text-3xl font-medium my-5 text-white">
+        Solicitudes recibidas
+      </h1>
       {loading ? (
-        <p>Cargando...</p>
+        <p className="text-white">Cargando...</p>
       ) : (
         <div className="gap-10">
           {data.receivedRFQs.length === 0 ? (
