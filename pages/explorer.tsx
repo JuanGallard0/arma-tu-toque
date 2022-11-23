@@ -21,6 +21,7 @@ const AllLinksQuery = gql`
           category
           description
           id
+          instruments
         }
       }
     }
@@ -63,6 +64,7 @@ function Explorer() {
                   id={node.id}
                   description={node.description}
                   imageUrl={node.imageUrl}
+                  instruments={node.instruments}
                 />
               </a>
             </Link>

@@ -134,11 +134,13 @@ const Link = ({ link }) => {
           <h1>{link.title}</h1>
           <img src={link.imageUrl} className="shadow-lg rounded-lg" />
           <p className="text-gray-900 text-xl mb-2">Descripción: </p>
-          <p className="text-gray-900 text-xl font-bold mb-2">{link.description}</p>
+          <p className="text-gray-900 text-xl font-bold mb-2">
+            {link.description}
+          </p>
 
           <h2>Instrumentos</h2>
 
-          <p className="text-gray-900 text-xl mb-8">{link.url}</p>
+          <p className="text-gray-900 text-xl mb-8">{link.instruments}</p>
         </div>
       ) : (
         <div className="container m-40 px-8 bg-gray-100 flex flex-wrap border-4 border-opacity-60 rounded-lg overflow-hidden">
@@ -154,7 +156,7 @@ const Link = ({ link }) => {
             <p>{link.description}</p>
 
             <h4>Instrumentos</h4>
-            <p className="text-gray-600">{link.url}</p>
+            <p className="text-gray-600">{link.instruments}</p>
           </section>
           <section className="w-3/5">
             <form
@@ -173,7 +175,9 @@ const Link = ({ link }) => {
                 />
               </label>
               <label className="block">
-                <span className="text-gray-700">Nombre persona/empresa que contrata</span>
+                <span className="text-gray-700">
+                  Nombre persona/empresa que contrata
+                </span>
                 <input
                   placeholder="Persona/Empresa"
                   name="title"
@@ -257,10 +261,36 @@ const Link = ({ link }) => {
               >
                 <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-indigo-600 group-hover:h-full"></span>
                 <span className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
-                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                  <svg
+                    className="w-5 h-5 text-green-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path>
+                  </svg>
                 </span>
                 <span className="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
-                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                  <svg
+                    className="w-5 h-5 text-green-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path>
+                  </svg>
                 </span>
                 {loading ? (
                   <span className="flex items-center justify-center">
@@ -275,7 +305,9 @@ const Link = ({ link }) => {
                     Creando...
                   </span>
                 ) : (
-                  <span className="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">Enviar solicitud</span>
+                  <span className="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">
+                    Enviar solicitud
+                  </span>
                 )}
               </button>
             </form>
@@ -300,6 +332,7 @@ export const getServerSideProps = async ({ params }) => {
       imageUrl: true,
       description: true,
       ownerId: true,
+      instruments: true,
     },
   });
   return {

@@ -12,6 +12,7 @@ const FavoritesQuery = gql`
       imageUrl
       description
       category
+      instruments
     }
   }
 `;
@@ -41,6 +42,7 @@ const Favorites = () => {
                     imageUrl={link.imageUrl}
                     url={link.url}
                     id={link.id}
+                    instruments={link.instruments}
                   />
                 </a>
               </Link>

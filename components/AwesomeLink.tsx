@@ -8,6 +8,7 @@ export const AwesomeLink = ({
   category,
   description,
   id,
+  instruments,
 }) => {
   return (
     <div
@@ -22,12 +23,14 @@ export const AwesomeLink = ({
         />
 
         <div className="p-6 hover:bg-indigo-700 hover:text-white transition duration-300 ease-in">
-          <h2 className="text-base font-medium text-indigo-300 mb-1">{category}</h2>
+          <h2 className="text-base font-medium text-indigo-300 mb-1">
+            {category}
+          </h2>
           <h1 className="text-2xl font-semibold mb-3">{title}</h1>
           <p className="leading-relaxed mb-3">{description}</p>
-            <div className="flex">
-              <FaGuitar /> <p className="leading-relaxed mb-3">{url}</p>
-            </div>
+          <div className="flex">
+            <FaGuitar /> <p className="leading-relaxed mb-3">{instruments}</p>
+          </div>
         </div>
       </div>
     </div>
