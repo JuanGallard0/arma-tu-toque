@@ -1,4 +1,4 @@
-import { nonNull, objectType, stringArg, extendType } from "nexus";
+import { nonNull, objectType, stringArg, extendType, booleanArg } from "nexus";
 import { connectionFromArraySlice, cursorToOffset } from "graphql-relay";
 
 export const Link = objectType({
@@ -13,13 +13,13 @@ export const Link = objectType({
     t.string("imageUrl");
     t.string("category");
     t.string("ownerId");
-    t.string("firstName")
-    t.string("lastName")
-    t.string("email")
-    t.string("birthDate")
-    t.string("state")
-    t.boolean("hasInstruments")
-    t.string("instruments")
+    t.string("firstName");
+    t.string("lastName");
+    t.string("email");
+    t.string("birthDate");
+    t.string("state");
+    t.boolean("hasInstruments");
+    t.string("instruments");
   },
 });
 
@@ -81,6 +81,13 @@ export const CreateLinkMutation = extendType({
         imageUrl: nonNull(stringArg()),
         category: nonNull(stringArg()),
         description: nonNull(stringArg()),
+        firstName: stringArg(),
+        lastName: stringArg(),
+        email: stringArg(),
+        birthDate: stringArg(),
+        state: stringArg(),
+        hasInstruments: stringArg(),
+        instruments: stringArg(),
       },
       async resolve(_parent, args, ctx) {
         const user = await ctx.prisma.user.findUnique({
@@ -100,6 +107,13 @@ export const CreateLinkMutation = extendType({
           category: args.category,
           description: args.description,
           owner: { connect: { id: user.id } },
+          firstName: args.firstName,
+          lastName: args.lastName,
+          email: args.email,
+          birthDate: args.birthDate,
+          state: args.state,
+          hasInstruments: args.hasInstruments,
+          instruments: args.instruments,
         };
 
         return await ctx.prisma.link.create({

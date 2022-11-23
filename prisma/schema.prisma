@@ -25,7 +25,7 @@ model Link {
   email       String
   birthDate   String
   state       String
-  hasInstruments  Boolean
+  hasInstruments  String
   instruments String
 }
 

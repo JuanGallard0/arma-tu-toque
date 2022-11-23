@@ -7,7 +7,6 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   plugins: ["@typescript-eslint"],
-  extends: "next",
   rules: {
     "no-unsafe-optional-chaining": "off",
   },
