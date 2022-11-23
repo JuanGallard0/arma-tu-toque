@@ -20,6 +20,13 @@ model Link {
   users       User[]
   owner       User     @relation(fields: [ownerId] ,references: [id],"profileRelation")
   ownerId     String   @unique
+  firstName   String
+  lastName    String
+  email       String
+  birthDate   String
+  state       String
+  hasInstruments  Boolean
+  instruments String
 }
 
 model RFQ {

@@ -13,6 +13,13 @@ export const Link = objectType({
     t.string("imageUrl");
     t.string("category");
     t.string("ownerId");
+    t.string("firstName")
+    t.string("lastName")
+    t.string("email")
+    t.string("birthDate")
+    t.string("state")
+    t.boolean("hasInstruments")
+    t.string("instruments")
   },
 });
 
